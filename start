@@ -74,6 +74,7 @@ cd ..
 
 # -----
 # clean *.ts
-cd $run_dir
+time=600
 
-nohup sh ./clean.s >& ../$logs_dir/clean.log &
+cd $run_dir
+nohup sh ./clean.s $time >& ../$logs_dir/clean.log &
