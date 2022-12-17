@@ -60,7 +60,7 @@ sleep 2
 # start streams
 
 streams=(c1 c2 2k 4k test)
-streams=(2k 4k)
+streams=(2k bd)
 
 echo
 echo " start streams ... "
@@ -68,7 +68,7 @@ echo " start streams ... "
 cd $run_dir
 for s in ${streams[@]}; do
     echo "    - s = $s "
-    nohup sh ./stream.s $s $rtsp_port >& ../$logs_dir/$s.log &
+    nohup sh ./stream.s $s $rtsp_port $rtmp_port >& ../$logs_dir/$s.log &
 done
 cd ..
 
@@ -83,6 +83,7 @@ nohup sh ./clean.s $time >& ../$logs_dir/clean.log &
 #
 echo
 echo " video stream address: "
-echo "    - http://127.0.0.1:8081/hls/${streams[0]}.m3u8"
-echo "    - rstp://127.0.0.1:8554/rtsp/${streams[0]}.live"
+echo "    - http://127.0.0.1:$http_port/hls/${streams[0]}.m3u8"
+echo "    - rstp://127.0.0.1:$rtsp_port/rtsp/${streams[0]}.live"
+echo "    - rstp://127.0.0.1:$rtmp_port/rtmp/${streams[0]}.live"
 echo

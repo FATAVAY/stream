@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+stop () {
+	pid=(`ps -ef | grep "$1" | grep -v grep | awk '{print $2}' `)
+	for p in $pid
+	do
+		kill -9 $p
+	done
+}
+
+mission=(rtsp-simple-server \
+             http.server \
+             ffmpeg \
+             clean.s)
+
+for m in ${mission[@]}; do
+    echo "stop $m ..."
+    stop $m
+done
+
+echo "rm hls/* ..."
+rm hls/*
