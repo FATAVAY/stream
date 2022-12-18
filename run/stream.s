@@ -20,9 +20,9 @@ ffmpeg \
     -hwaccel cuda \
 	-i $input \
     \
-    -c copy -f hls  -hls_time 6 -hls_list_size 10 \
+    -c copy -f hls  -hls_time 1 -hls_list_size 0 \
 	../hls/$1.m3u8 \
     \
 	-fflags +igndts \
 	-c copy \
-    -f rtsp -rtsp_transport tcp rtsp://127.0.0.1:$2/rtsp/$1.live  \
+    -f rtsp -rtsp_transport tcp rtsp://127.0.0.1:$2/rtsp/$1.live  
