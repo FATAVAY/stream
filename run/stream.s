@@ -20,9 +20,17 @@ ffmpeg \
     -hwaccel cuda \
 	-i $input \
     \
-    -c copy -f hls  -hls_time 1 -hls_list_size 0 \
+    -preset veryfast -c copy \
+    -f hls  \
+    -hls_init_time 1 \
+    -hls_time 1 \
+    -hls_list_size 1 \
+    -hls_wrap 2 \
+    -hls_playlist_type event \
 	../hls/$1.m3u8 \
     \
 	-fflags +igndts \
 	-c copy \
     -f rtsp -rtsp_transport tcp rtsp://127.0.0.1:$2/rtsp/$1.live  
+
+#    -preset veryfast -c copy -f hls  -hls_time 1 -hls_list_size 0 \
