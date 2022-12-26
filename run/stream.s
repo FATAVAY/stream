@@ -7,11 +7,11 @@ case $1 in
         ;;
     c1)
         input=rtsp://admin:fatavay1@192.168.10.51:554/h264/ch1/main/av_stream 
-        opt1="-re"
+        opt1=""
         ;;
     c2)
         input=rtsp://admin:CFBYGQ@192.168.10.52:554/h264/ch1/main/av_stream
-        opt1="-re"
+        opt1="-r 10"
         ;;
 esac
 
