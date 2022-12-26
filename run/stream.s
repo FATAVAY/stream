@@ -11,7 +11,7 @@ case $1 in
         ;;
     c2)
         input=rtsp://admin:CFBYGQ@192.168.10.52:554/h264/ch1/main/av_stream
-        opt1="-r 10"
+        opt1="-r 15"
         ;;
 esac
 
