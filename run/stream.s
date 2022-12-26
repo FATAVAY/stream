@@ -28,13 +28,16 @@ ffmpeg \
     -hwaccel cuda \
 	-i $input \
     \
-    -preset veryfast -c copy \
+    -strict experimental \
+    -c copy -preset veryfast \
+    -g 30 \
+    -sc_threshold 0 \
+    -flags +cgop \
     -f hls  \
-    -hls_init_time 1 \
-    -hls_time 1 \
-    -hls_list_size 1 \
-    -hls_wrap 2 \
+    -hls_wrap 0 \
+    -hls_time 2 \
     -hls_playlist_type event \
+    -hls_list_size 0 \
 	../hls/$1.m3u8 \
     \
 	-fflags +igndts \

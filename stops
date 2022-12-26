@@ -9,7 +9,7 @@ stop () {
 }
 
 mission=(rtsp-simple-server \
-             http.server \
+             start.http \
              ffmpeg \
              clean.s)
 
