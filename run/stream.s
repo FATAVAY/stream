@@ -30,14 +30,14 @@ ffmpeg \
     \
     -strict experimental \
     -c copy -preset veryfast \
-    -g 30 \
     -sc_threshold 0 \
     -flags +cgop \
     -f hls  \
-    -hls_wrap 0 \
     -hls_time 2 \
     -hls_playlist_type event \
-    -hls_list_size 0 \
+    -hls_list_size 4 \
+    -hls_flags delete_segments \
+    -segment_wrap 10 \
 	../hls/$1.m3u8 \
     \
 	-fflags +igndts \
