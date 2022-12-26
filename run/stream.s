@@ -31,6 +31,7 @@ ffmpeg \
     \
 	-fflags +igndts \
 	-c copy \
+	-c:v h264_nvenc \
     -f rtsp -rtsp_transport tcp rtsp://127.0.0.1:$2/rtsp/$1.live  
 
 #    -preset veryfast -c copy -f hls  -hls_time 1 -hls_list_size 0 \
