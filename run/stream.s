@@ -4,7 +4,14 @@ os=`uname`
 
 if [[ $os == 'Darwin' ]]; then
     opt2=" "
-elif [[ $os == 'Linux' ]]; then
+else
+    opt2="-c:v h264_nvenc"
+fi
+os=`uname`
+
+if [[ $os == 'Darwin' ]]; then
+    opt2=" "
+else
     opt2="-c:v h264_nvenc"
 fi
 

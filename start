@@ -68,7 +68,7 @@ echo " start streams ... "
 cd $run_dir
 for s in ${streams[@]}; do
     echo "    - s = $s "
-    nohup sh ./stream.s $s $rtsp_port $rtmp_port >& ../$logs_dir/$s.log &
+    nohup bash ./stream.s $s $rtsp_port $rtmp_port >& ../$logs_dir/$s.log &
 done
 cd ..
 
@@ -77,7 +77,7 @@ cd ..
 time=600
 
 cd $run_dir
-nohup sh ./clean.s $time >& ../$logs_dir/clean.log &
+nohup bash ./clean.s $time >& ../$logs_dir/clean.log &
 
 # -----
 #
