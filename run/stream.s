@@ -2,23 +2,16 @@
 
 os=`uname`
 
-if [[ $os == 'Darwin' ]]; then
-    opt2=" "
-else
-    opt2="-c:v h264_nvenc"
-fi
-os=`uname`
-
-if [[ $os == 'Darwin' ]]; then
-    opt2=" "
-else
-    opt2="-c:v h264_nvenc"
-fi
+opt2=" "
 
 case $1 in
     2k | 4k | 8k | bd)
         input="../video/$1.mp4"
         opt1="-re -stream_loop -3"
+
+        if [[ $os == 'Linux' ]]; then
+            opt2="-c:v h264_nvenc"
+        fi
         ;;
     c1)
         input=rtsp://admin:fatavay1@192.168.10.51:554/h264/ch1/main/av_stream 
