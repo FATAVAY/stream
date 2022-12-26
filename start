@@ -60,7 +60,6 @@ sleep 2
 # start streams
 
 streams=(c1 c2 2k 4k test)
-streams=(2k bd)
 
 echo
 echo " start streams ... "
