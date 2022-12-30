@@ -38,6 +38,7 @@ ffmpeg \
     -hls_list_size 4 \
     -hls_flags delete_segments \
     -segment_wrap 10 \
+    -hls_segment_filename ../hls/$1_%09d.ts \
 	../hls/$1.m3u8 \
     \
 	-fflags +igndts \
