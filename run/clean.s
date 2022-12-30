@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
 time=$1
+remain=$2
 streams=($@)
-
-remain=3
 
 while true
 do

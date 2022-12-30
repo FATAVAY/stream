@@ -75,9 +75,10 @@ cd ..
 # -----
 # clean *.ts
 time=600
+remain=10   # keep ts number
 
 cd $run_dir
-nohup bash ./clean.s $time ${streams[@]} >& ../$logs_dir/clean.log &
+nohup bash ./clean.s $time $remain ${streams[@]} >& ../$logs_dir/clean.log &
 
 # -----
 #
