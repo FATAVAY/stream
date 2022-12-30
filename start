@@ -77,7 +77,7 @@ cd ..
 time=600
 
 cd $run_dir
-nohup bash ./clean.s $time >& ../$logs_dir/clean.log &
+nohup bash ./clean.s $time ${streams[@]} >& ../$logs_dir/clean.log &
 
 # -----
 #
