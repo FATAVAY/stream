@@ -5,7 +5,7 @@ os=`uname`
 opt2=" "
 
 case $1 in
-    2k | 4k | 8k | bd)
+    2k | 4k | 8k | bd | fight)
         input="../video/$1.mp4"
         opt1="-re -stream_loop -3"
 
@@ -45,5 +45,3 @@ ffmpeg \
 	-c copy \
 	$opt2 \
     -f rtsp -rtsp_transport tcp rtsp://127.0.0.1:$2/rtsp/$1.live  
-
-#    -preset veryfast -c copy -f hls  -hls_time 1 -hls_list_size 0 \

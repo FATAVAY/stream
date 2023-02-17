@@ -60,7 +60,7 @@ sleep 2
 # -----
 # start streams
 
-streams=(c1 c2 2k 4k bd)
+streams=(c1 c2 2k 4k bd fight)
 
 echo
 echo " start streams ... "
