@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+#-----------------------------------------------------------------------------------
+# This script is to:
+#   1. run stream server: rtsp/rtmp/hls
+#   2. init video stream
+#
+# Author: Hao Feng (F1)
+#
+# Date:   Dec. 15, 2022
+#
+# Copyright (c) 2022-, FATAVAY CO., LTD.
+
+#-----------------------------------------------------------------------------------
+
+logs_dir=logs
+hls_dir=hls
+run_dir=run
+server_dir=rtsp
+if_save=true       # true/false; if saved stream as mkv file
+
+# -----
+# port
+http_port=8081
+rtsp_port=8554      # check rtsp-simple-server.yml
+rtmp_port=1936
+
+# -----
+# python environment
+os=`uname`
+if [[ $os == 'Darwin' ]]; then
+  python_dir="/Users/fengh/Research/FORECAST/DCM"
+else
+  python_dir="/Users/fengh/Research/FORECAST/DCM"
+fi
+
+# -----
+# activate python environment
+
+source $python_dir/envs/bin/activate
+
+# -----
+# start:
+#   - rtsp server port: 8554
+#   - rtmp server port: 1936
+
+echo
+echo " start rtsp server ... "
+cd $server_dir
+nohup ./rtsp-simple-server.$os >& ../$logs_dir/server.log & 
+cd ..
+sleep 2
+
+
+#   - http server port: 8081
+echo
+echo " start http server ... "
+#nohup python -m http.server $http_port >& $logs_dir/http.log &
+nohup python $run_dir/start_http.py $http_port >& $logs_dir/http.log &
+sleep 2
+
+# -----
+# start streams
+
+#streams=(c1 c2 2k 4k bd fight)
+streams=(c1 c2 2k 4k) 
+
+echo
+echo " start streams ... "
+
+cd $run_dir
+for s in ${streams[@]}; do
+    echo "    - s = $s "
+    nohup bash ./stream.s $s $rtsp_port $rtmp_port $if_save >& ../$logs_dir/$s.log &
+done
+cd ..
+
+# -----
+# clean *.ts
+time=600
+remain=10   # keep ts number
+
+cd $run_dir
+nohup bash ./clean.s $time $remain ${streams[@]} >& ../$logs_dir/clean.log &
+
+# -----
+#
+echo
+echo " video stream address: "
+echo "    - http://127.0.0.1:$http_port/hls/${streams[0]}.m3u8"
+echo "    - rstp://127.0.0.1:$rtsp_port/rtsp/${streams[0]}.live"
+echo "    - rstp://127.0.0.1:$rtmp_port/rtmp/${streams[0]}.live"
+echo

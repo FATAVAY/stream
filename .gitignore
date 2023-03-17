@@ -1,0 +1,6 @@
+video
+
+hls/*
+logs/*
+
+__pycache__

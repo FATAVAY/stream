@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+
+stop () {
+	pid=(`ps -ef | grep "$1" | grep -v grep | awk '{print $2}' `)
+	for p ($pid) {
+		kill -9 $p
+	}
+}
+
+mission=(rtsp-simple-server \
+             start.http \
+             clean.s \
+             ffmpeg)
+
+for m in ${mission[@]}; do
+    echo "stop $m ..."
+    stop $m
+done
+
+echo "rm hls/* ..."
+rm hls/*
+
+echo "rm save/*.mkv ..."
+rm save/*.mkv
