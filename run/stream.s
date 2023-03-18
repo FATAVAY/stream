@@ -43,7 +43,7 @@ opt_hls="-f hls  \
 
 #---
 if [[ ${i_save} == "true" ]]; then
-    save="-strict -2 ../save/$stream.mkv"
+    save="-strict -2 -ar 22050 ../save/$stream.flv"
 else
     save=" "
 fi
@@ -60,12 +60,12 @@ case $stream in
         ;;
     c1)
         input=rtsp://admin:fatavay1@192.168.10.51:554/h264/ch1/main/av_stream 
-        opti="-r 25"
+        opti=" "
         ;;
     c2)
 #       input=rtsp://admin:CFBYGQ@192.168.10.52:554/h264/ch1/main/av_stream
         input=rtsp://admin:CFBYGQ@192.168.21.189:554/h264/ch1/main/av_stream
-        opti="-r 10"
+        opti=" "
         ;;
 esac
 

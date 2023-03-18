@@ -36,5 +36,5 @@ rm -rf logs/*
 echo "rm hls/* ..."
 rm -rf hls/*
 
-echo "rm save/*.mkv ..."
+echo "rm save/* ..."
 rm -rf save/*
