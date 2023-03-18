@@ -6,7 +6,8 @@
 #
 # Author: Hao Feng (F1)
 #
-# Date:   Dec. 15, 2022
+# Init Date:   Dec. 15, 2022
+# Last Date:   Mar. 18, 2023
 #
 # Copyright (c) 2022-, FATAVAY CO., LTD.
 
@@ -54,7 +55,6 @@ sleep 2
 #   - http server port: 8081
 echo
 echo " start http server ... "
-#nohup python -m http.server $http_port >& $logs_dir/http.log &
 nohup python $run_dir/start_http.py $http_port >& $logs_dir/http.log &
 sleep 2
 

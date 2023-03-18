@@ -1,4 +1,17 @@
 #!/usr/bin/env zsh
+#-----------------------------------------------------------------------------------
+# This script is to:
+#   1. stop all video stream
+#   2. rm all temporary files
+#
+# Author: Hao Feng (F1)
+#
+# Init Date:   Dec. 15, 2022
+# Last Date:   Mar. 18, 2023
+#
+# Copyright (c) 2022-, FATAVAY CO., LTD.
+
+#-----------------------------------------------------------------------------------
 
 stop () {
 	pid=(`ps -ef | grep "$1" | grep -v grep | awk '{print $2}' `)

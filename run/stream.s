@@ -1,4 +1,16 @@
 #!/usr/bin/env bash
+#-----------------------------------------------------------------------------------
+# This script is to:
+#   1. generate video stream through ffmpeg
+#
+# Author: Hao Feng (F1)
+#
+# Init Date:   Dec. 15, 2022
+# Last Date:   Mar. 18, 2023
+#
+# Copyright (c) 2022-, FATAVAY CO., LTD.
+
+#-----------------------------------------------------------------------------------
 
 os=`uname`
 
@@ -9,8 +21,9 @@ rtmp_p=$3
 i_save=$4
 
 #---
+encoder="-vcodec libx264 "
+
 opti=
-optencode="-vcodec libx264 "
 
 optg="-strict experimental \
       -c copy \
@@ -42,7 +55,7 @@ case $stream in
 
         if [[ $os == 'Linux' ]]; then
             opti="$opti -hwaccel cuda"
-            optencode="$optencode -c:v h264_nvenc"
+            encoder="$encoder -c:v h264_nvenc"
         fi
         ;;
     c1)
@@ -67,7 +80,7 @@ ffmpeg \
     \
     $save \
     \
-    $optencode \
+    $encoder \
     \
     -f rtsp -rtsp_transport tcp rtsp://127.0.0.1:${rtsp_p}/rtsp/$stream.live  
 #   -f flv rtmp://127.0.0.1:${rtmp_p}/rtmp/$stream.live 
