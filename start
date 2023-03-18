@@ -70,7 +70,7 @@ echo " start streams ... "
 cd $run_dir
 for s in ${streams[@]}; do
     echo "    - s = $s "
-    nohup sh ./stream.s $s $rtsp_port $rtmp_port $if_save >& ../$logs_dir/$s.log &
+    nohup bash ./stream.s $s $rtsp_port $rtmp_port $if_save >& ../$logs_dir/$s.log &
 done
 cd ..
 
