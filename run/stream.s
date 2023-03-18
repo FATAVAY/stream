@@ -19,7 +19,7 @@ case $1 in
 
         if [[ $os == 'Linux' ]]; then
             opt1="$opt1 -hwaccel cuda"
-#           opt2="-c:v h264_nvenc"
+            opt2="-c:v h264_nvenc"
         elif [[ $os == "Darwin" ]]; then
             opt2=
         fi
