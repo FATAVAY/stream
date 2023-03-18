@@ -24,4 +24,4 @@ echo "rm hls/* ..."
 rm -rf hls/*
 
 echo "rm save/*.mkv ..."
-rm -rf save/*.mkv
+rm -rf save/*
