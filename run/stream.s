@@ -10,7 +10,7 @@ i_save=$4
 
 #---
 opti=
-optcode="$optcode -vcodec libx264 "
+optencode="-vcodec libx264 "
 
 optg="-strict experimental \
       -c copy \
@@ -26,7 +26,7 @@ opt_hls="-f hls  \
     -hls_flags delete_segments \
     -segment_wrap 10 \
     -hls_segment_filename ../hls/${stream}_%09d.ts \
-	../hls/$stream.m3u8 "
+    ../hls/$stream.m3u8 "
 
 #---
 if [[ ${i_save} == "true" ]]; then
@@ -42,7 +42,7 @@ case $stream in
 
         if [[ $os == 'Linux' ]]; then
             opti="$opti -hwaccel cuda"
-            optcode="$optcode -c:v h264_nvenc"
+            optencode="$optencode -c:v h264_nvenc"
         fi
         ;;
     c1)
@@ -67,7 +67,7 @@ ffmpeg \
     \
     $save \
     \
-	$optcode \
+    $optencode \
     \
     -f rtsp -rtsp_transport tcp rtsp://127.0.0.1:${rtsp_p}/rtsp/$stream.live  
 #   -f flv rtmp://127.0.0.1:${rtmp_p}/rtmp/$stream.live 
