@@ -17,6 +17,9 @@ for m in ${mission[@]}; do
     stop $m
 done
 
+echo "rm logs/* ..."
+rm logs/*
+
 echo "rm hls/* ..."
 rm hls/*
 

@@ -3,6 +3,8 @@
 os=`uname`
 
 opt2=" "
+#opt3="-strict experimental -c copy -preset veryfast -sc_threshold 0 -flags +cgop"
+opt3=
 
 if [[ $4 == "true" ]]; then
     save="-strict -2 ../save/$1.mkv"
@@ -32,16 +34,13 @@ case $1 in
         opt1="-r 10"
         ;;
 esac
-opt2="$opt2 -r 25"
+opt2="$opt2 -vcodec libx264 "
 
 ffmpeg \
     $opt1 \
 	-i $input \
     \
-    -strict experimental \
-    -c copy -preset veryfast \
-    -sc_threshold 0 \
-    -flags +cgop \
+    $opt3 \
     -f hls  \
     -hls_time 2 \
     -hls_playlist_type event \
@@ -54,5 +53,5 @@ ffmpeg \
 	-fflags +igndts \
     $save \
 	$opt2 \
-    -vcodec libx264 -r 25 -f rtsp -rtsp_transport tcp rtsp://127.0.0.1:$2/rtsp/$1.live  \
-    -vcodec libx264 -r 25 -f flv rtmp://127.0.0.1:$3/rtmp/$1.live 
+    -f rtsp -rtsp_transport tcp rtsp://127.0.0.1:$2/rtsp/$1.live  
+#   -f flv rtmp://127.0.0.1:$3/rtmp/$1.live 
