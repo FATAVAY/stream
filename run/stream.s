@@ -25,7 +25,7 @@ opt_hls="-f hls  \
     -hls_list_size 4 \
     -hls_flags delete_segments \
     -segment_wrap 10 \
-    -hls_segment_filename ../hls/$stream_%09d.ts \
+    -hls_segment_filename ../hls/${stream}_%09d.ts \
 	../hls/$stream.m3u8 "
 
 #---
