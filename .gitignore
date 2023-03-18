@@ -2,5 +2,6 @@ video
 
 hls/*
 logs/*
+save/*
 
 __pycache__

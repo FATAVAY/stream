@@ -32,7 +32,7 @@ case $1 in
         opt1="-r 10"
         ;;
 esac
-opt2="$opt2 -c:v copy -r 25"
+opt2="$opt2 -r 25"
 
 ffmpeg \
     $opt1 \
@@ -54,5 +54,5 @@ ffmpeg \
 	-fflags +igndts \
     $save \
 	$opt2 \
-    -vcodec copy -f rtsp -rtsp_transport tcp rtsp://127.0.0.1:$2/rtsp/$1.live  \
-    -vcodec copy -acodec copy -f flv rtmp://127.0.0.1:$3/rtmp/$1.live 
+    -vcodec libx264 -r 25 -f rtsp -rtsp_transport tcp rtsp://127.0.0.1:$2/rtsp/$1.live  \
+    -vcodec libx264 -r 25 -f flv rtmp://127.0.0.1:$3/rtmp/$1.live 
