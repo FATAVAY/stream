@@ -18,10 +18,10 @@ for m in ${mission[@]}; do
 done
 
 echo "rm logs/* ..."
-rm logs/*
+rm -rf logs/*
 
 echo "rm hls/* ..."
-rm hls/*
+rm -rf hls/*
 
 echo "rm save/*.mkv ..."
-rm save/*.mkv
+rm -rf save/*.mkv
