@@ -30,11 +30,13 @@ for m in ${mission[@]}; do
     stop $m
 done
 
+setopt no_nomatch
+
 echo "rm logs/* ..."
-rm -rf logs/*
+rm -rf logs/* 
 
 echo "rm hls/* ..."
-rm -rf hls/*
+rm -rf hls/* 
 
 echo "rm save/* ..."
 rm -rf save/*
