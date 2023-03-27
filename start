@@ -33,11 +33,7 @@ rtmp_port=`cat $set_file | yq '.port.rtmp'`
 # -----
 # python environment
 os=`uname`
-if [[ $os == 'Darwin' ]]; then
-  python_dir="/Users/fengh/Research/FORECAST/DCM"
-else
-  python_dir="/Users/fengh/Research/FORECAST/DCM"
-fi
+python_dir=`cat $set_file | yq '.dir.python'`
 
 # -----
 # activate python environment

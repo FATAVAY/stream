@@ -3,9 +3,11 @@ dir:
   hls: hls
   run: run
   server: rtsp
+  python: "/Users/fengh/Research/FORECAST/DCM"
 
 # true/false; if saving stream as flv file
-save: true  
+#save: true  
+save: false
 
 # check rtsp-simple-server.yml to match
 port:
