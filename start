@@ -7,23 +7,28 @@
 # Author: Hao Feng (F1)
 #
 # Init Date:   Dec. 15, 2022
-# Last Date:   Mar. 18, 2023
+# Last Date:   Mar. 27, 2023
 #
 # Copyright (c) 2022-, FATAVAY CO., LTD.
 
 #-----------------------------------------------------------------------------------
 
-logs_dir=logs
-hls_dir=hls
-run_dir=run
-server_dir=rtsp
-if_save=true       # true/false; if saved stream as mkv file
+#--- parse setting yaml file
+set_file="setting.yaml"
 
-# -----
+# dirs
+logs_dir=`cat $set_file | yq '.dir.logs'`
+hls_dir=`cat $set_file | yq '.dir.hls'`
+run_dir=`cat $set_file | yq '.dir.run'`
+server_dir=`cat $set_file | yq '.dir.server'`
+
+# if save video files
+if_save=`cat $set_file | yq '.save'`
+
 # port
-http_port=8081
-rtsp_port=8554      # check rtsp-simple-server.yml
-rtmp_port=1936
+http_port=`cat $set_file | yq '.port.http'`
+rtsp_port=`cat $set_file | yq '.port.rtsp'`
+rtmp_port=`cat $set_file | yq '.port.rtmp'`
 
 # -----
 # python environment
@@ -36,14 +41,10 @@ fi
 
 # -----
 # activate python environment
-
 source $python_dir/envs/bin/activate
 
 # -----
-# start:
-#   - rtsp server port: 8554
-#   - rtmp server port: 1936
-
+# start server
 echo
 echo " start rtsp server ... "
 cd $server_dir
@@ -51,8 +52,6 @@ nohup ./rtsp-simple-server.$os >& ../$logs_dir/server.log &
 cd ..
 sleep 2
 
-
-#   - http server port: 8081
 echo
 echo " start http server ... "
 nohup python $run_dir/start_http.py $http_port >& $logs_dir/http.log &
@@ -62,7 +61,9 @@ sleep 2
 # start streams
 
 #streams=(c1 c2 2k 4k bd fight)
-streams=(c1 c2 2k 4k) 
+#streams=(c1 c2 2k 4k) 
+streams=`cat $set_file | yq '.stream[]'`
+echo " streams: $streams"
 
 echo
 echo " start streams ... "
@@ -76,8 +77,8 @@ cd ..
 
 # -----
 # clean *.ts
-time=600
-remain=10   # keep ts number
+time=`cat $set_file | yq '.clean.time'`
+remain=`cat $set_file | yq '.clean.remain'`
 
 cd $run_dir
 nohup bash ./clean.s $time $remain ${streams[@]} >& ../$logs_dir/clean.log &
@@ -85,7 +86,7 @@ nohup bash ./clean.s $time $remain ${streams[@]} >& ../$logs_dir/clean.log &
 # -----
 #
 echo
-echo " video stream address: "
+echo " video stream address is like: "
 echo "    - http://127.0.0.1:$http_port/hls/${streams[0]}.m3u8"
 echo "    - rstp://127.0.0.1:$rtsp_port/rtsp/${streams[0]}.live"
 echo "    - rstp://127.0.0.1:$rtmp_port/rtmp/${streams[0]}.live"

@@ -1,0 +1,21 @@
+dir:
+  logs: logs
+  hls: hls
+  run: run
+  server: rtsp
+
+# true/false; if saving stream as flv file
+save: true  
+
+# check rtsp-simple-server.yml to match
+port:
+  http: 8081
+  rtsp: 8554     
+  rtmp: 1936
+
+#stream: [c1 c2 2k 4k bd fight]
+stream: [c1 c2 2k 4k]
+
+clean:
+  time: 600
+  remain: 10
